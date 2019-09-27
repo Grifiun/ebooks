@@ -11,39 +11,19 @@
     <head>
         <title>Login</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="./style-login.css">
+        <link href="css/style-login.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <header>
-            <h1>eBook's Code'n Bugs</h1>            
+            <article>
+                <h1>eBook's Code'n Bugs</h1>     
+            </article>                   
         </header>
-        <div>
-            <article>
-                <h3>username:</h3>
-            </article>
-            <article>
-                <input type="text" id="username"/>
-            </article>
-            <article>
-                <h3>contraseña:</h3>
-            </article>
-            <article>
-                <input type="text" id="pass1"/>
-            </article>
-            <article>
-                <h3>Repita la contraseña:</h3>
-            </article>
-            <article>
-                <input type="text" id="pass2"/>
-            </article>
-            <article>                
-                <button onclick="iniciarSesion()" type="button">Iniciar Sesion</button>
-            </article>            
-        </div>
+        <%@include file="html/formulario-inicio-sesion.html" %>    
         <footer>
             <p class="pFooter">Introducción a la programación 2 - IPC2</p>
             <p class="pFooter">Derechos Reservados DenilsonDeLeón </p>
         </footer>
-        <script type="text/javascript" src="./script-login.js"></script>
+        <script src="script/script-login.js" type="text/javascript"></script>
     </body>
 </html>

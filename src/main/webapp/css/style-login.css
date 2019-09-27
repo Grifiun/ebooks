@@ -3,12 +3,12 @@ body{
     color: cyan;
     margin-top: 5%;
 }
-h2{
-    width: 15%;
+h1{
+    width: 17%;
     display: block;
     margin: auto;
 }
-h3{
+h3, label{
     width: 18%;
     display: block;
     margin: auto;
