@@ -1,3 +1,5 @@
+package servlet;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -55,7 +57,7 @@ public class ServletLogin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+            
     }
 
     /**
@@ -69,7 +71,7 @@ public class ServletLogin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        System.out.println(request.getParameter("username"));
     }
 
     /**

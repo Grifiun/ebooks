@@ -11,19 +11,14 @@
     <head>
         <title>Login</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="css-botstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/style-login.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <header>
-            <article>
-                <h1>eBook's Code'n Bugs</h1>     
-            </article>                   
-        </header>
-        <%@include file="html/formulario-inicio-sesion.html" %>    
-        <footer>
-            <p class="pFooter">Introducción a la programación 2 - IPC2</p>
-            <p class="pFooter">Derechos Reservados DenilsonDeLeón </p>
-        </footer>
-        <script src="script/script-login.js" type="text/javascript"></script>
+        
+        <%@include file="../html/formulario-inicio-sesion.html" %>  
+        <script src="js-bootstrap/bootstrap.js" type="text/javascript"></script>
+        <script src="../script/script-login.js" type="text/javascript"></script>
+        
     </body>
 </html>

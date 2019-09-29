@@ -1,8 +1,21 @@
-<form>
-    <label for="username">Username:</label> 
-    <input id="username" name="username"/>            
-    <label for="pass"/>Pass:</label> 
-    <input type="text" id="pass" name="pass"/>
-    <button onclick="iniciarSesion()" type="submit">Iniciar sesion</button>
-    
-</form>
+<div class="modal-dialog text-center">
+        <div class="col-sm-8 caja1">
+            <div class="modal-content">
+                <div class="col-12 imagen">
+                    <img src="img/login.png"/>
+                </div>
+                <form class="col-12 caja2" method="post">
+                    <div class="titulo">
+                        <h5>ebooks code'n books</h5>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="username" name="username"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="pass" name="password"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Ingresar</button>
+                </form>                
+            </div>
+        </div>
+    </div>
