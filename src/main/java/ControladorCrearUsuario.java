@@ -4,13 +4,9 @@
  * and open the template in the editor.
  */
 
-import conection.Consulta;
-import conection.EnlaceJDBC;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,26 +31,20 @@ public class ControladorCrearUsuario extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String[] datos = new String[11];
-        datos = null;
-        String aux = null;
-        String[] identificador = {"username", "pass", "nombre", "apellido", "edad", "pais", "ciudad", "descripcion", "hobbies", "temas_interes"};
+        ArrayList <String> datos = new ArrayList();
+        String[] identificador = {"username", "pass", "nombre", "apellido", "edad", 
+                                    "pais", "ciudad", "descripcion", "hobbies", "temas_interes"};
         for(int i = 0; i < 10; i++){
+            String aux = null;
             aux = request.getParameter(identificador[i]);
-            System.out.println(aux);
-            datos[i] = aux;
+            datos.add(aux);
         }        
-        datos[10] = "Lector";
-        try {
-            Consulta.registrarUsuario(EnlaceJDBC.EnlaceJDBC(), datos);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ControladorCrearUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(ControladorCrearUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(ControladorCrearUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        
+        for(int i = 0; i < datos.size(); i++){
+            System.out.println("\n"+datos.get(i));
         }
+        
+        
     }
 
     /**

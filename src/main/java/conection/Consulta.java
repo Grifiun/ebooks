@@ -8,6 +8,7 @@ package conection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -74,7 +75,7 @@ public class Consulta {
         
     }
     
-    public static void registrarUsuario(java.sql.Connection conexion, String[] datos){
+    public static void registrarUsuario(java.sql.Connection conexion, ArrayList<String> datos){
         try {
             declaracionPreparada = null;
             
@@ -84,9 +85,12 @@ public class Consulta {
             
             for(int i = 0; i < 11; i++){
                 if(i != 4)
-                    declaracionPreparada.setString(i + 1, datos[i]);
+                    declaracionPreparada.setString(i + 1, datos.get(i));
                 if(i == 4)
-                    declaracionPreparada.setInt(i + 1, Integer.parseInt(datos[i]));
+                    declaracionPreparada.setInt(i + 1, Integer.parseInt(datos.get(i)));
+                
+                if(i == 10)
+                   declaracionPreparada.setString(11, "Editor");
             }              
             declaracionPreparada.executeUpdate();
             conexion.close();
