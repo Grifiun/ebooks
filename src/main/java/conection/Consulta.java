@@ -77,20 +77,25 @@ public class Consulta {
     
     public static void registrarUsuario(java.sql.Connection conexion, ArrayList<String> datos){
         try {
-            declaracionPreparada = null;
-            
+            declaracionPreparada = null;            
             declaracionPreparada = conexion.prepareStatement("INSERT INTO Usuario (username, pass, nombre, apellido"
                     + "edad, pais, ciudad, descripcion, hobbie, temas_interes, rol)"
                     + "VALUES ('?', '?','?','?', ?,'?','?','?','?','?', '?')");
             
-            for(int i = 0; i < 11; i++){
-                if(i != 4)
-                    declaracionPreparada.setString(i + 1, datos.get(i));
-                if(i == 4)
-                    declaracionPreparada.setInt(i + 1, Integer.parseInt(datos.get(i)));
+            for(int i = 1; i <= 11; i++){
+                switch(i){
+                    case 4: 
+                        declaracionPreparada.setInt(i, Integer.parseInt(datos.get(i - 1)));
+                        break;
+                    case 10:
+                        declaracionPreparada.setString(11, "Editor");
+                        break;
+                    default:
+                        declaracionPreparada.setString(i, datos.get(i - 1));
+                        break;
+                               
+                }
                 
-                if(i == 10)
-                   declaracionPreparada.setString(11, "Editor");
             }              
             declaracionPreparada.executeUpdate();
             conexion.close();

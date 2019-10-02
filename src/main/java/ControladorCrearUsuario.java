@@ -4,9 +4,14 @@
  * and open the template in the editor.
  */
 
+import conection.Consulta;
+import conection.EnlaceJDBC;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -44,7 +49,19 @@ public class ControladorCrearUsuario extends HttpServlet {
             System.out.println("\n"+datos.get(i));
         }
         
+        try {
+            Consulta.registrarUsuario(EnlaceJDBC.EnlaceJDBC(), datos);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ControladorCrearUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(ControladorCrearUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(ControladorCrearUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
+        
+        RequestDispatcher despachar = request.getRequestDispatcher("jsp/home-editor.jsp");
+        despachar.forward(request, response);
     }
 
     /**
