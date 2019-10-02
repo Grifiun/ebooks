@@ -4,8 +4,13 @@
  * and open the template in the editor.
  */
 
+import conection.Consulta;
+import conection.EnlaceJDBC;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -21,39 +26,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(urlPatterns = {"/ControladorLogin"})
 public class ControladorLogin extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
+    
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -64,19 +37,29 @@ public class ControladorLogin extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {       
-        System.out.println(request.getParameter("pass"));
-        RequestDispatcher despachar = request.getRequestDispatcher("jsp/home.jsp");
-        despachar.forward(request, response);
+            throws ServletException, IOException {   
+        String username = request.getParameter("username");      
+        String pass = request.getParameter("pass");
         
-        
+        try {
+                if(Consulta.login(EnlaceJDBC.EnlaceJDBC(), pass, username) == true){
+                    RequestDispatcher despachar = request.getRequestDispatcher("jsp/home.jsp");
+                    despachar.forward(request, response);
+                }             
+                else{
+                    
+                }
+
+
+        } catch (ClassNotFoundException ex) {
+        Logger.getLogger(ControladorLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+        Logger.getLogger(ControladorLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+        Logger.getLogger(ControladorLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {      
+        Logger.getLogger(ControladorLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }          
+
     }
-    
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */   
-
 }

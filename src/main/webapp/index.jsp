@@ -14,8 +14,7 @@
         <link href="css-botstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/style-login.css" rel="stylesheet" type="text/css"/>
     </head>
-    <body>
-        
+    <body>       
         <%@include file="../html/formulario-inicio-sesion.html" %>  
         <script src="js-bootstrap/bootstrap.js" type="text/javascript"></script>
         <script src="../script/script-login.js" type="text/javascript"></script>

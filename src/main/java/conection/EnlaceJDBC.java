@@ -19,14 +19,18 @@ public class EnlaceJDBC {
     static String USER = "root";
     static String PASS = "123@MySQL";
     static String STRING_CONECTION = "jdbc:mysql://localhost:3306/ebooks";
-    public static java.sql.Connection EnlaceJDBC() {
+    public static java.sql.Connection EnlaceJDBC() throws ClassNotFoundException, InstantiationException, IllegalAccessException {        
         try {
+            Class.forName("com.mysql.jdbc.Driver");
             Connection conection = null;    
             conection = DriverManager.getConnection(STRING_CONECTION, USER, PASS);
+            System.out.println("exitosamente");
             return conection;
         } catch (SQLException ex) {
-            Logger.getLogger(EnlaceJDBC.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
+            System.out.println("cafada");
             return null;
         }
     }    
 }
+
