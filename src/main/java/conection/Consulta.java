@@ -47,6 +47,7 @@ public class Consulta {
         while(rsPrueba.next()){
             String passAux = rsPrueba.getString("pass");
             if(passAux.endsWith(pass)){
+                
                 aux = true;
             }
             else{
@@ -69,12 +70,32 @@ public class Consulta {
         } catch (SQLException ex) {
             System.out.println("\n\n\n"+ex);
             return null;
-        }                    
+        }                   
         
     }
     
-    
-    
+    public static void registrarUsuario(java.sql.Connection conexion, String[] datos){
+        try {
+            declaracionPreparada = null;
+            
+            declaracionPreparada = conexion.prepareStatement("INSERT INTO Usuario (username, pass, nombre, apellido"
+                    + "edad, pais, ciudad, descripcion, hobbie, temas_interes, rol)"
+                    + "VALUES ('?', '?','?','?', ?,'?','?','?','?','?', '?')");
+            
+            for(int i = 0; i < 11; i++){
+                if(i != 4)
+                    declaracionPreparada.setString(i + 1, datos[i]);
+                if(i == 4)
+                    declaracionPreparada.setInt(i + 1, Integer.parseInt(datos[i]));
+            }              
+            declaracionPreparada.executeUpdate();
+            conexion.close();
+           
+        } catch (SQLException ex) {
+            System.out.println("\n\n\n"+ex);
+            
+        }     
+    }
     
 }
 
