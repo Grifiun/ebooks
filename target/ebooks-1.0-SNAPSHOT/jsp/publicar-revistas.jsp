@@ -1,6 +1,6 @@
 <%-- 
-    Document   : home-editor
-    Created on : 02-oct-2019, 14:29:22
+    Document   : publicar-revistas
+    Created on : 03-oct-2019, 2:21:40
     Author     : grifiun
 --%>
 
@@ -12,15 +12,12 @@
         <title>Home</title>
         <%@include file="../html/css-bootstrap.html"%>
         <link href="../css/style-home-editor.css" rel="stylesheet" type="text/css"/>
-        <%@include file="../html/js-bootstrap.html" %>        
+        <%@include file="../html/js-bootstrap.html" %>
     </head>
     <body>
         <%@include file="../html/editor/nav-editor.html"%>
-        <div class="modal-content col-xl-7 text-center">
-            <h1>HOLA XD</h1>
-            <div class="modal-content align-content-start">
-                <h1>HOLA</h1>
-            </div>
-        </div>
+        <%@include file="../html/editor/publicar-revista.html" %>%>
+        <%@include file="../html/js-bootstrap.html" %>
+        <script src="../js-bootstrap/bootstrap.js" type="text/javascript"></script>
     </body>
 </html>

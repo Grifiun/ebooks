@@ -10,13 +10,17 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Home</title>
+        <%@include file="../html/css-bootstrap.html"%>
+        <link href="../css/style-home-editor.css" rel="stylesheet" type="text/css"/>
+        <%@include file="../html/js-bootstrap.html" %>        
     </head>
     <body>
-        <div class="modal-dialog text-center">
-        <div class="col-sm-6 caja1">
-            <div class="modal-content">
+        <%@include file="../html/editor/nav-editor.html"%>
+        <div class="modal-content col-xl-7 text-center">
+            <h1>HOLA XD</h1>
+            <div class="modal-content align-content-start">
+                <h1>HOLA</h1>
             </div>
         </div>
-    </div>
     </body>
 </html>

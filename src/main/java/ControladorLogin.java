@@ -44,7 +44,7 @@ public class ControladorLogin extends HttpServlet {
         
         try {
                 if(Consulta.login(EnlaceJDBC.EnlaceJDBC(), username, pass) == true){
-                    RequestDispatcher despachar = request.getRequestDispatcher("jsp/home.jsp");
+                    RequestDispatcher despachar = request.getRequestDispatcher("jsp/home-editor.jsp");
                     despachar.forward(request, response);
                 }             
                 else{
