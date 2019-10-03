@@ -43,7 +43,8 @@ public class ControladorCrearUsuario extends HttpServlet {
             String aux = null;
             aux = request.getParameter(identificador[i]);
             datos.add(aux);
-        }        
+        }       
+        
         
         for(int i = 0; i < datos.size(); i++){
             System.out.println("\n"+datos.get(i));

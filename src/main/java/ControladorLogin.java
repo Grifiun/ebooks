@@ -9,6 +9,7 @@ import conection.EnlaceJDBC;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -42,12 +43,13 @@ public class ControladorLogin extends HttpServlet {
         String pass = request.getParameter("pass");
         
         try {
-                if(Consulta.login(EnlaceJDBC.EnlaceJDBC(), pass, username) == true){
+                if(Consulta.login(EnlaceJDBC.EnlaceJDBC(), username, pass) == true){
                     RequestDispatcher despachar = request.getRequestDispatcher("jsp/home.jsp");
                     despachar.forward(request, response);
                 }             
                 else{
-                    
+                    RequestDispatcher despachar = request.getRequestDispatcher("index.jsp");
+                    despachar.forward(request, response);
                 }
 
 

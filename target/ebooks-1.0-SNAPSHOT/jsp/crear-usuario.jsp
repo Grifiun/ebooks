@@ -13,14 +13,14 @@
         <%@include file="../html/css-bootstrap.html"%>
         <link href="../css/posicion-caja1-registro.css" rel="stylesheet" type="text/css"/>
         <link href="../css/style-login.css" rel="stylesheet" type="text/css"/>
+        <%@include file="../html/js-bootstrap.html" %>
     </head>
     <body>        
         <%@include file="../html/partes-codigo-html/parte-superior-login.html" %> 
         <%@include file="../html/crear-usuario/imagen.html" %> 
         <%@include file="../html/crear-usuario/formulario-datos-a-registrar.html" %> 
         <%@include file="../html/crear-usuario/boton-registro-a-login.html" %> 
-        <%@include file="../html/partes-codigo-html/parte-inferior-login.html" %>
+        <%@include file="../html/partes-codigo-html/parte-inferior-login.html" %>        
         
-        <%@include file="../html/js-bootstrap.html" %>
     </body>
 </html>
