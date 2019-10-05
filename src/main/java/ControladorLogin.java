@@ -6,6 +6,7 @@
 
 import conection.Consulta;
 import conection.EnlaceJDBC;
+import conection.RevisarLogin;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -43,7 +44,7 @@ public class ControladorLogin extends HttpServlet {
         String pass = request.getParameter("pass");
         
         try {
-                if(Consulta.login(EnlaceJDBC.EnlaceJDBC(), username, pass) == true){
+                if(RevisarLogin.login(EnlaceJDBC.EnlaceJDBC(), username, pass) == true){
                     RequestDispatcher despachar = request.getRequestDispatcher("jsp/home-editor.jsp");
                     despachar.forward(request, response);
                 }             

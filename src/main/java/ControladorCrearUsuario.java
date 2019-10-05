@@ -6,6 +6,7 @@
 
 import conection.Consulta;
 import conection.EnlaceJDBC;
+import conection.RegistroUsuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -35,31 +36,43 @@ public class ControladorCrearUsuario extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException {       
+        
         ArrayList <String> datos = new ArrayList();
         String[] identificador = {"username", "pass", "nombre", "apellido", "edad", 
                                     "pais", "ciudad", "descripcion", "hobbies", "temas_interes"};
+
+        int posRol;
         for(int i = 0; i < 10; i++){
             String aux = null;
             aux = request.getParameter(identificador[i]);
             datos.add(aux);
         }       
         
+        String rol = null;        
+        posRol = Integer.parseInt(request.getParameter("rol"));
+        if(posRol == 1){
+            rol = "Lector";
+        }
+        if(posRol == 2){
+            rol = "Editor";
+        }
+        
+        datos.add(rol);
         
         for(int i = 0; i < datos.size(); i++){
             System.out.println("\n"+datos.get(i));
         }
         
         try {
-            Consulta.registrarUsuario(EnlaceJDBC.EnlaceJDBC(), datos);
+            RegistroUsuario.registrarUsuario(EnlaceJDBC.EnlaceJDBC(), datos);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ControladorCrearUsuario.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
             Logger.getLogger(ControladorCrearUsuario.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
             Logger.getLogger(ControladorCrearUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        }   
         
         RequestDispatcher despachar = request.getRequestDispatcher("jsp/home-editor.jsp");
         despachar.forward(request, response);
