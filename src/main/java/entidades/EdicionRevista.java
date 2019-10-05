@@ -12,60 +12,34 @@ import java.sql.Date;
  *
  * @author grifiun
  */
-public class EdicionRevista {
-    InputStream archivoRevistaPDFGuardar;
-    byte[] archivoRevistaPDFCargar;
-    String nombreRevista;
-    String descripcionRevista;
-    int costoSuscripcion;
-    
-    String tituloEdicionRevista;
-    String descripcionEdicionRevista;
-    boolean bloqueoMG; 
-    boolean bloqueoComentario; 
-    boolean bloqueoSuscripcion;
-    boolean estadoPublicacion;
-    Date fechaPublicacionEdRevista;
-    int costoDiaEdRev;
+public class EdicionRevista {    
+    private int idEdicionRevista;
+    private int idRevista;
+    private String tituloEdicionRevista;
+    private String descripcionEdicionRevista;    
+    private Date fechaPublicacionEdicionRevista;    
+    private InputStream revistaPDF;
+    private byte[] byteRevistaPDF;
+    private String nombreRevistaPDF;    
+    private boolean bloqueoSuscripcion;
+    private boolean bloqueoMeGusta;
+    private boolean bloqueoComentario;
+    private boolean estadoPublicacion;
 
-    public InputStream getArchivoRevistaPDFGuardar() {
-        return archivoRevistaPDFGuardar;
+    public int getIdEdicionRevista() {
+        return idEdicionRevista;
     }
 
-    public void setArchivoRevistaPDFGuardar(InputStream archivoRevistaPDFGuardar) {
-        this.archivoRevistaPDFGuardar = archivoRevistaPDFGuardar;
+    public void setIdEdicionRevista(int idEdicionRevista) {
+        this.idEdicionRevista = idEdicionRevista;
     }
 
-    public byte[] getArchivoRevistaPDFCargar() {
-        return archivoRevistaPDFCargar;
+    public int getIdRevista() {
+        return idRevista;
     }
 
-    public void setArchivoRevistaPDFCargar(byte[] archivoRevistaPDFCargar) {
-        this.archivoRevistaPDFCargar = archivoRevistaPDFCargar;
-    }
-
-    public String getNombreRevista() {
-        return nombreRevista;
-    }
-
-    public void setNombreRevista(String nombreRevista) {
-        this.nombreRevista = nombreRevista;
-    }
-
-    public String getDescripcionRevista() {
-        return descripcionRevista;
-    }
-
-    public void setDescripcionRevista(String descripcionRevista) {
-        this.descripcionRevista = descripcionRevista;
-    }
-
-    public int getCostoSuscripcion() {
-        return costoSuscripcion;
-    }
-
-    public void setCostoSuscripcion(int costoSuscripcion) {
-        this.costoSuscripcion = costoSuscripcion;
+    public void setIdRevista(int idRevista) {
+        this.idRevista = idRevista;
     }
 
     public String getTituloEdicionRevista() {
@@ -84,20 +58,36 @@ public class EdicionRevista {
         this.descripcionEdicionRevista = descripcionEdicionRevista;
     }
 
-    public boolean isBloqueoMG() {
-        return bloqueoMG;
+    public Date getFechaPublicacionEdicionRevista() {
+        return fechaPublicacionEdicionRevista;
     }
 
-    public void setBloqueoMG(boolean bloqueoMG) {
-        this.bloqueoMG = bloqueoMG;
+    public void setFechaPublicacionEdicionRevista(Date fechaPublicacionEdicionRevista) {
+        this.fechaPublicacionEdicionRevista = fechaPublicacionEdicionRevista;
     }
 
-    public boolean isBloqueoComentario() {
-        return bloqueoComentario;
+    public InputStream getRevistaPDF() {
+        return revistaPDF;
     }
 
-    public void setBloqueoComentario(boolean bloqueoComentario) {
-        this.bloqueoComentario = bloqueoComentario;
+    public void setRevistaPDF(InputStream revistaPDF) {
+        this.revistaPDF = revistaPDF;
+    }
+
+    public byte[] getByteRevistaPDF() {
+        return byteRevistaPDF;
+    }
+
+    public void setByteRevistaPDF(byte[] byteRevistaPDF) {
+        this.byteRevistaPDF = byteRevistaPDF;
+    }
+
+    public String getNombreRevistaPDF() {
+        return nombreRevistaPDF;
+    }
+
+    public void setNombreRevistaPDF(String nombreRevistaPDF) {
+        this.nombreRevistaPDF = nombreRevistaPDF;
     }
 
     public boolean isBloqueoSuscripcion() {
@@ -108,6 +98,22 @@ public class EdicionRevista {
         this.bloqueoSuscripcion = bloqueoSuscripcion;
     }
 
+    public boolean isBloqueoMeGusta() {
+        return bloqueoMeGusta;
+    }
+
+    public void setBloqueoMeGusta(boolean bloqueoMeGusta) {
+        this.bloqueoMeGusta = bloqueoMeGusta;
+    }
+
+    public boolean isBloqueoComentario() {
+        return bloqueoComentario;
+    }
+
+    public void setBloqueoComentario(boolean bloqueoComentario) {
+        this.bloqueoComentario = bloqueoComentario;
+    }
+
     public boolean isEstadoPublicacion() {
         return estadoPublicacion;
     }
@@ -115,21 +121,6 @@ public class EdicionRevista {
     public void setEstadoPublicacion(boolean estadoPublicacion) {
         this.estadoPublicacion = estadoPublicacion;
     }
-
-    public Date getFechaPublicacionEdRevista() {
-        return fechaPublicacionEdRevista;
-    }
-
-    public void setFechaPublicacionEdRevista(Date fechaPublicacionEdRevista) {
-        this.fechaPublicacionEdRevista = fechaPublicacionEdRevista;
-    }
-
-    public int getCostoDiaEdRev() {
-        return costoDiaEdRev;
-    }
-
-    public void setCostoDiaEdRev(int costoDiaEdRev) {
-        this.costoDiaEdRev = costoDiaEdRev;
-    }    
+    
     
 }

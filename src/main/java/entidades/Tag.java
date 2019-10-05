@@ -10,5 +10,24 @@ package entidades;
  * @author grifiun
  */
 public class Tag {
+    private int idTag;
+    private String tag;
+
+    public int getIdTag() {
+        return idTag;
+    }
+
+    public void setIdTag(int idTag) {
+        this.idTag = idTag;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+    
     
 }

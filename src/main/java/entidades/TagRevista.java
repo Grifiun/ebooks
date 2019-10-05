@@ -9,6 +9,25 @@ package entidades;
  *
  * @author grifiun
  */
-public class TagRevista {
+public class TagRevista extends Tag{
+    private int idTagRevista;
+    private int idRevista;
+
+    public int getIdTagRevista() {
+        return idTagRevista;
+    }
+
+    public void setIdTagRevista(int idTagRevista) {
+        this.idTagRevista = idTagRevista;
+    }
+
+    public int getIdRevista() {
+        return idRevista;
+    }
+
+    public void setIdRevista(int idRevista) {
+        this.idRevista = idRevista;
+    }
+    
     
 }
