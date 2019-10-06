@@ -1,0 +1,28 @@
+<div class="form-group">
+    <h5>Categorias: </h5> 
+    <table id="tabla2"><tr>
+    <%
+        boolean i2 = true;
+        for(int i = 0; i < categoriasAux.size(); i++){
+        if(i % 5 == 0){
+            i2 = true;
+        }
+        else{
+            i2 = false;
+        }
+        pageContext.setAttribute("paso", i2);
+    %>
+    <c:if test="${paso}">
+        </tr><tr>    
+    </c:if>
+        <td>            
+           <input type="checkbox" name="categoriaElegido" id="<%=categoriasAux.get(i).getIdCategoria()%>" value="<%=categoriasAux.get(i).getIdCategoria()%>" />
+           <label for="<%=categoriasAux.get(i).getIdCategoria()%>">
+           <%=categoriasAux.get(i).getCategoria()%></label>
+        </td>
+    <%
+        }
+    %>
+    </tr>
+    </table>
+</div>

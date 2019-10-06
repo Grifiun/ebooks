@@ -1,0 +1,23 @@
+  
+            <div class="form-group">
+                <h5>Titulo de edicion</h5>
+                <input type="text" class="form-control" required placeholder="titulo edicion" name="titulo_edicion"/>
+            </div>
+            <div class="form-group">
+                <h5>Descripcion edicion revista</h5>
+                <textarea class="form-control" id="descripcion_revista" required rows="3" name="descripcion_edicion_revista"></textarea>
+            </div> 
+            <%@include file="form-categorias.html"%>
+            <div class="form-group">
+                <h5>Tags</h5>
+                <input type="text" class="form-control" placeholder="tags" name="tag"/>
+            </div>   
+            <div class="form-group">
+                <h5>Subir libro</h5>
+                <input type="file" accept="application/pdf" class="form-control" name="archivopdf"/>
+            </div>
+            <button type="submit" class="btn btn-dark">Publicar</button>
+       </form>
+        
+    </div>
+</div>

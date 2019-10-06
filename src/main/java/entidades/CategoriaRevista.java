@@ -28,6 +28,4 @@ public class CategoriaRevista extends Categoria{
     public void setIdRevista(int idRevista) {
         this.idRevista = idRevista;
     }
-    
-    
 }

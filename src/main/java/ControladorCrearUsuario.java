@@ -4,11 +4,9 @@
  * and open the template in the editor.
  */
 
-import conection.Consulta;
 import conection.EnlaceJDBC;
 import conection.RegistroUsuario;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,34 +36,30 @@ public class ControladorCrearUsuario extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {       
         
-        ArrayList <String> datos = new ArrayList();
+        ArrayList <String> datos = new ArrayList();//ArrayList de tipo String que almacena los datos del usuario
+        //Creamos un arreglo de tipo String con los identificadores de los datos del form
         String[] identificador = {"username", "pass", "nombre", "apellido", "edad", 
                                     "pais", "ciudad", "descripcion", "hobbies", "temas_interes"};
-
-        int posRol;
+        int posRol;//creamos una variable que se usara para definir el rol 
         for(int i = 0; i < 10; i++){
-            String aux = null;
-            aux = request.getParameter(identificador[i]);
-            datos.add(aux);
+            String aux = null;//creamos una variable auxiliar de tipo String
+            aux = request.getParameter(identificador[i]);//agregamos a la variable auxiliar el valor del identificador
+            datos.add(aux);//agregamos la variable auxiliar al arreglo datos
         }       
         
         String rol = null;        
         posRol = Integer.parseInt(request.getParameter("rol"));
-        if(posRol == 1){
+        if(posRol == 1){//Si la posicion de select es 1 entonces es un Lector
             rol = "Lector";
         }
-        if(posRol == 2){
+        if(posRol == 2){//Si la posicion de select es 2 entonces es un Editor
             rol = "Editor";
         }
         
-        datos.add(rol);
-        
-        for(int i = 0; i < datos.size(); i++){
-            System.out.println("\n"+datos.get(i));
-        }
+        datos.add(rol);//agregamos al ArrayList datos
         
         try {
-            RegistroUsuario.registrarUsuario(EnlaceJDBC.EnlaceJDBC(), datos);
+            RegistroUsuario.registrarUsuario(EnlaceJDBC.EnlaceJDBC(), datos);//registrmos el usuario
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ControladorCrearUsuario.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {

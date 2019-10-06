@@ -9,7 +9,9 @@ import conection.EnlaceJDBC;
 import conection.RevisarLogin;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +23,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -42,6 +45,11 @@ public class ControladorLogin extends HttpServlet {
             throws ServletException, IOException {   
         String username = request.getParameter("username");      
         String pass = request.getParameter("pass");
+        LocalDate fechaSistema = LocalDate.now();
+        
+        HttpSession session = request.getSession();
+        session.setAttribute("username_sesion", request.getParameter("username"));        
+        session.setAttribute("fecha_sistema", fechaSistema);
         
         try {
                 if(RevisarLogin.login(EnlaceJDBC.EnlaceJDBC(), username, pass) == true){

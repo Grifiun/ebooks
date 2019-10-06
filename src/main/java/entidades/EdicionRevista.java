@@ -20,10 +20,7 @@ public class EdicionRevista {
     private Date fechaPublicacionEdicionRevista;    
     private InputStream revistaPDF;
     private byte[] byteRevistaPDF;
-    private String nombreRevistaPDF;    
-    private boolean bloqueoSuscripcion;
-    private boolean bloqueoMeGusta;
-    private boolean bloqueoComentario;
+    private String nombreRevistaPDF;
     private boolean estadoPublicacion;
 
     public int getIdEdicionRevista() {
@@ -90,30 +87,6 @@ public class EdicionRevista {
         this.nombreRevistaPDF = nombreRevistaPDF;
     }
 
-    public boolean isBloqueoSuscripcion() {
-        return bloqueoSuscripcion;
-    }
-
-    public void setBloqueoSuscripcion(boolean bloqueoSuscripcion) {
-        this.bloqueoSuscripcion = bloqueoSuscripcion;
-    }
-
-    public boolean isBloqueoMeGusta() {
-        return bloqueoMeGusta;
-    }
-
-    public void setBloqueoMeGusta(boolean bloqueoMeGusta) {
-        this.bloqueoMeGusta = bloqueoMeGusta;
-    }
-
-    public boolean isBloqueoComentario() {
-        return bloqueoComentario;
-    }
-
-    public void setBloqueoComentario(boolean bloqueoComentario) {
-        this.bloqueoComentario = bloqueoComentario;
-    }
-
     public boolean isEstadoPublicacion() {
         return estadoPublicacion;
     }
@@ -121,6 +94,8 @@ public class EdicionRevista {
     public void setEstadoPublicacion(boolean estadoPublicacion) {
         this.estadoPublicacion = estadoPublicacion;
     }
+
+    
     
     
 }

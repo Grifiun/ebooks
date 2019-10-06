@@ -39,9 +39,14 @@ public class RevisarLogin {
             if(passAux.equals(pass)){//si la contrasena es igual, entonces          
                 aux = true;//el booleano es verdadero
             }
-        }        
+        }     
+        
+        rsPrueba.close();
+        
             if(conexion.isClosed() == false)//si la conexion está abierta la cerramos
                 conexion.close();
+            
+        
         return aux;//retornamos el booleano
     }
 }
