@@ -16,10 +16,8 @@
            
     </head>
     <body>
-        <%@include file="../html/editor/nav-editor.html"%>
-        <%
-            out.print(session.getAttribute("username"));
-        %>
+        <%@include file="../html/administrador/nav-administrador.html"%>
+        
         <div class="modal-content col-xl-7 text-center">
             
             

@@ -6,6 +6,7 @@
 
 import conection.Consulta;
 import conection.EnlaceJDBC;
+import conection.RegistroUsuario;
 import conection.RevisarLogin;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -53,8 +54,21 @@ public class ControladorLogin extends HttpServlet {
         
         try {
                 if(RevisarLogin.login(EnlaceJDBC.EnlaceJDBC(), username, pass) == true){
-                    RequestDispatcher despachar = request.getRequestDispatcher("jsp/home-editor.jsp");
-                    despachar.forward(request, response);
+                    String rol = RegistroUsuario.rol(EnlaceJDBC.EnlaceJDBC(), username);
+                    if(rol.equals("Editor")){
+                        RequestDispatcher despachar = request.getRequestDispatcher("jsp/home-editor.jsp");
+                        despachar.forward(request, response);
+                    }                  
+                    if(rol.equals("Administrador")){
+                        RequestDispatcher despachar = request.getRequestDispatcher("jsp/home-administrador.jsp");
+                        despachar.forward(request, response);
+                    } 
+                    if(rol.equals("Lector")){
+                        RequestDispatcher despachar = request.getRequestDispatcher("jsp/home.jsp");
+                        despachar.forward(request, response);
+                    } 
+                    
+                    
                 }             
                 else{
                     RequestDispatcher despachar = request.getRequestDispatcher("index.jsp");

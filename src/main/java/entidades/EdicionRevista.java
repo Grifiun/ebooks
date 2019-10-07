@@ -12,9 +12,8 @@ import java.sql.Date;
  *
  * @author grifiun
  */
-public class EdicionRevista {    
+public class EdicionRevista extends Revista{    
     private int idEdicionRevista;
-    private int idRevista;
     private String tituloEdicionRevista;
     private String descripcionEdicionRevista;    
     private Date fechaPublicacionEdicionRevista;    
@@ -30,15 +29,7 @@ public class EdicionRevista {
     public void setIdEdicionRevista(int idEdicionRevista) {
         this.idEdicionRevista = idEdicionRevista;
     }
-
-    public int getIdRevista() {
-        return idRevista;
-    }
-
-    public void setIdRevista(int idRevista) {
-        this.idRevista = idRevista;
-    }
-
+    
     public String getTituloEdicionRevista() {
         return tituloEdicionRevista;
     }

@@ -5,8 +5,10 @@
  */
 package conection;
 
+import entidades.EdicionRevista;
 import entidades.Revista;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -59,7 +61,7 @@ public class RegistroRevista {
      */
     public static String idRevista(java.sql.Connection conexion, String nombreRevista) throws SQLException{
         String idRev = null;
-        String orden = "SELECT id_revista FROM nombre_revista="+nombreRevista;//
+        String orden = "SELECT id_revista FROM Revista WHERE nombre_revista="+nombreRevista;//
         ResultSet rsPrueba = Consulta.crearDeclaracionPreparadaSimple(conexion, orden).executeQuery(); //Obtenemos el resultado de la query con los datos dados       
         
         while(rsPrueba.next()){//si existe el id de la revista
@@ -73,11 +75,45 @@ public class RegistroRevista {
         return idRev;
     }
     
-    public static ArrayList<Revista> obtenerRevistas(Connection conexion, boolean estado_publicacion){        
-        String orden = "SELECT * FROM EdicionRevistas";
+    public static ArrayList<EdicionRevista> obtenerRevistas(Connection conexion, String estado_publicacion) throws SQLException{        
+        String orden = "SELECT Revista.username_editor," +
+                        "Revista.nombre_revista, Revista.costo_suscripcion," +
+                        "EdicionRevista.titulo_edicion_revista," +
+                        "Revista.id_revista, EdicionRevista.id_edicion_revista," +
+                        "EdicionRevista.descripcion_edicion_revista," +
+                        "EdicionRevista.fecha_publicacion_edicion FROM Revista INNER JOIN EdicionRevista" +
+                        "ON Revista.id_revista = EdicionRevista.id_revista" +
+                        "WHERE EdicionRevista.estado_publicacion="+estado_publicacion;
+        ArrayList<EdicionRevista> conjuntoRevistas = null; 
+        ResultSet rsPrueba = Consulta.crearDeclaracionPreparadaSimple(conexion, orden).executeQuery(); //Obtenemos el resultado de la query con los datos dados       
         
-        return null;   
+        while(rsPrueba.next()){//si existe el id de la revista            
+            
+            EdicionRevista revista = new EdicionRevista();
+            revista.setUsernameEditor(rsPrueba.getString("username_editor"));
+            revista.setNombreRevista(rsPrueba.getString("nombre_revista"));
+            //revista.setCostoSuscripcion(rsPrueba.getString("costo_suscripcion"));
+            revista.setTituloEdicionRevista(rsPrueba.getString("titulo_edicion_revista"));
+            revista.setIdRevista(Integer.parseInt(rsPrueba.getString("id_revista")));            
+            revista.setIdEdicionRevista(Integer.parseInt(rsPrueba.getString("id_edicion_revista"))); 
+            revista.setDescripcionEdicionRevista("descripcion_edicion_revista");
+            revista.setFechaPublicacionEdicionRevista(Date.valueOf(rsPrueba.getString("fecha_publicacion_edicion")));
+            
+            conjuntoRevistas.add(revista);
+            revista = null;
+        }
+        rsPrueba.close();//se cierra el ResultSet
+        if(conexion.isClosed() == false)//si la conexion está abierta la cerramos
+            conexion.close();
+        
+        return conjuntoRevistas;   
     }
     
-    
+    public static void validarRegistro(Connection conexion, String idEdicionRevista){
+        String orden = "UPDATE EdicionRevista SET estado_publicacion=1 WHERE id_edicion_revista=?";
+        
+        ArrayList<String> datos = null;
+        datos.add(idEdicionRevista);
+        Consulta.registrarOrden(conexion, datos, orden);        
+    }    
 }
