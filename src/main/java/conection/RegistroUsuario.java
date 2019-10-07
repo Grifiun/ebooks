@@ -33,16 +33,17 @@ public class RegistroUsuario {
     }
     
     
-    public static String rol(java.sql.Connection conexion, String username) throws SQLException{
-        String rol = null;
-        String orden = "SELECT rol FROM Usuario where="+username;//
-        ResultSet rsPrueba = Consulta.crearDeclaracionPreparadaSimple(conexion, orden).executeQuery(); //Obtenemos el resultado de la query con los datos dados       
+    public static String rol(java.sql.Connection conexion, ArrayList<String> datos) throws SQLException{
+        String rol = null;        
+        String orden = "SELECT rol FROM Usuario WHERE username=?";//        
         
+        ResultSet rsPrueba;
+        rsPrueba = Consulta.crearDeclaracionPreparada(conexion, datos, orden).executeQuery();
         while(rsPrueba.next()){//si existe el id de la revista
-            rol = rsPrueba.getString("id_revista");
-        } 
+            rol = rsPrueba.getString("rol");
+        }   
+        //se cierra el ResultSet
         
-        rsPrueba.close();//se cierra el ResultSet
         if(conexion.isClosed() == false)//si la conexion está abierta la cerramos
             conexion.close();
         

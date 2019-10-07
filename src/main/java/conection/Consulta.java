@@ -5,11 +5,14 @@
  */
 package conection;
 
+import java.io.DataInputStream;
+import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -27,7 +30,7 @@ public class Consulta {
      * @return 
      */
     public static void registrarOrden(java.sql.Connection conexion, ArrayList<String> datos, String orden){
-    try {
+    try {           
            crearDeclaracionPreparada(conexion, datos, orden).executeUpdate(); //Ejecutamos la orden de tipo Query creada a partir de la orden y datos dados
            if(conexion.isClosed() == false)//si la conexion está abierta la cerramos
                 conexion.close();
@@ -44,11 +47,11 @@ public class Consulta {
      * @param orden
      * @return 
      */
-    public static void registrarOrden(java.sql.Connection conexion, ArrayList<String> datos, String orden, byte[] archivo){
+    public static void registrarOrden(java.sql.Connection conexion, ArrayList<String> datos, String orden, InputStream archivo){
     try {
-            PreparedStatement dp = crearDeclaracionPreparada(conexion, datos, orden);
-            dp.setBytes(datos.size() + 1, archivo);
-            dp.executeQuery();
+            PreparedStatement dp = crearDeclaracionPreparada(conexion, datos, orden);            
+            dp.setBlob(datos.size() + 1, archivo);
+            dp.executeUpdate();
             //Ejecutamos la orden de tipo Query creada a partir de la orden y datos dados
            if(conexion.isClosed() == false)//si la conexion está abierta la cerramos
                 conexion.close();

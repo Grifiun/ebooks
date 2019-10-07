@@ -45,7 +45,7 @@ public class RegistroCategoria {
      * @param datos 
      */
     public static void registrarCategoria(java.sql.Connection conexion, ArrayList<String> datos){
-        String orden = "INSERT INTO Usuario (id_revista, id_categoria, categoria)" //Creamos la orden a enviar
+        String orden = "INSERT INTO Categoria (id_revista, id_categoria, categoria)" //Creamos la orden a enviar
                 + "VALUES (?, ?, ?)";
         Consulta.registrarOrden(conexion, datos, orden);    //Enviamos la conexion de la DB, los datos a registrar y la orden a seguir     
     }
@@ -59,8 +59,10 @@ public class RegistroCategoria {
      */
     public static String obtenerCategoriaPorId(Connection conexion, String idCategoriaSeleccionada) throws SQLException {
         String categoria = null;
-        String orden = "SELECT id_revista FROM nombre_revista="+idCategoriaSeleccionada;//
-        ResultSet rsPrueba = Consulta.crearDeclaracionPreparadaSimple(conexion, orden).executeQuery(); //Obtenemos el resultado de la query con los datos dados       
+        ArrayList<String> datos = new ArrayList();
+        datos.add(idCategoriaSeleccionada);
+        String orden = "SELECT categoria FROM Categoria WHERE id_categoria=?";//
+        ResultSet rsPrueba = Consulta.crearDeclaracionPreparada(conexion, datos, orden).executeQuery(); //Obtenemos el resultado de la query con los datos dados       
         
         while(rsPrueba.next()){//si existe la categoria del id ingresado
             categoria = rsPrueba.getString("categoria");//a la variable categoria le ingresamos el valor del atributo categoria

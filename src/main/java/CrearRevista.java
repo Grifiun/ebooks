@@ -8,6 +8,7 @@ import conection.EnlaceJDBC;
 import conection.RegistroCategoria;
 import conection.RegistroRevista;
 import conection.RegistroTag;
+import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -102,13 +103,16 @@ public class CrearRevista extends HttpServlet {
             String[] idCategoriaSeleccionadas = request.getParameterValues("categoriaElegido");//Obtenemos el id de las categorias seleccionadas en los checkbox
             String idRevista = null;
             idRevista = RegistroRevista.idRevista(EnlaceJDBC.EnlaceJDBC(), datos.get(0));
+            System.out.println(datos.get(0));
+            System.out.println(idRevista);
             String categoria = null;
             for(int i=0; i < idCategoriaSeleccionadas.length; i++){
-                datos = null;
+                datos.clear();
                 categoria = null;
                 
                 //Obtenemos la categoria por el id en turno
                 categoria = RegistroCategoria.obtenerCategoriaPorId(EnlaceJDBC.EnlaceJDBC(), idCategoriaSeleccionadas[i]);
+                System.out.println("LINEA 113: CATEGORIA: "+categoria);
                 //agregamos los datos al ArrayList datos
                 datos.add(idRevista);
                 datos.add(idCategoriaSeleccionadas[i]);
@@ -118,7 +122,7 @@ public class CrearRevista extends HttpServlet {
                 RegistroCategoria.registrarCategoria(EnlaceJDBC.EnlaceJDBC(), datos);
                 
             }
-            
+            System.out.println("EDICION REV");
             
             /**
              * GUARDAMOS LA EDICION DE LA REVISTA
@@ -130,23 +134,26 @@ public class CrearRevista extends HttpServlet {
              * revista_pdf
              * estado_publicacion (hay que crearla)
              */           
-            datos = null;
+            datos.clear();
             String tituloEd = request.getParameter("titulo_edicion");
             String descEd = request.getParameter("descripcion_edicion_revista");
             String estado = "0";//para indicar que aun no esta autorizado por un administrador su publicacion
+            System.out.println("BUFFER");
             byte[] pdfBYTE = null;//Buffer
             Part pdf;
-            pdf = request.getPart("archivopdf"); 
-            int pdfSize = (int) pdf.getSize();
+            pdf = request.getPart("archivopdf");              
+            InputStream pdfIS = pdf.getInputStream();
             
+            int pdfSize = (int) pdf.getSize();
+            System.out.println("BUFFER 2");
             datos.add(idRevista);
             datos.add(tituloEd);
             datos.add(descEd);
             datos.add(fechaRevista);
             datos.add(estado);
-            
-            RegistroRevista.registrarEdRevista(EnlaceJDBC.EnlaceJDBC(), datos, pdfBYTE);
-            
+            System.out.println("INICIO REGISTRO");
+            RegistroRevista.registrarEdRevista(EnlaceJDBC.EnlaceJDBC(), datos, pdfIS);
+            System.out.println("REGISTRO TERMINADO");
             /*
             if(pdfSize > 0){
                 pdfBYTE = new byte[pdfSize];
@@ -159,11 +166,12 @@ public class CrearRevista extends HttpServlet {
             /**
              * POR ULTIMO PROCEDEMOS A REGISTRAR LOS TAGS   
              */
-            datos = null;
+            System.out.println("TAGS");
+            datos.clear();
             String tags = request.getParameter("tag");
             datos.add(idRevista);
             datos.add(tags);
-            RegistroTag.registrarTags(EnlaceJDBC.EnlaceJDBC(), datos);
+            RegistroTag.registrarTags(datos);
              
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(CrearRevista.class.getName()).log(Level.SEVERE, null, ex);

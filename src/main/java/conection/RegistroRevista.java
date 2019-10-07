@@ -7,6 +7,7 @@ package conection;
 
 import entidades.EdicionRevista;
 import entidades.Revista;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -14,6 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -41,13 +43,13 @@ public class RegistroRevista {
      * @param datos
      * @param pdfBYTE 
      */
-    public static void registrarEdRevista(Connection conexion, ArrayList<String> datos, byte[] pdfBYTE) {
+    public static void registrarEdRevista(Connection conexion, ArrayList<String> datos, InputStream pdf) {
         //creamos la orde a enviar
        String orden = "INSERT INTO EdicionRevista (id_revista, titulo_edicion_revista,"
                + "descripcion_edicion_revista, fecha_publicacion_edicion, "
                + "estado_publicacion, revista_pdf)"
                + "VALUES (?, ?, ?, ?, ?, ?)";
-        Consulta.registrarOrden(conexion, datos, orden, pdfBYTE);    //Enviamos la conexion de la DB, los datos a registrar y la orden a seguir  
+        Consulta.registrarOrden(conexion, datos, orden, pdf);    //Enviamos la conexion de la DB, los datos a registrar y la orden a seguir  
         
     }
     
@@ -60,9 +62,11 @@ public class RegistroRevista {
      * @throws SQLException 
      */
     public static String idRevista(java.sql.Connection conexion, String nombreRevista) throws SQLException{
+        ArrayList<String> datos = new ArrayList();
+        datos.add(nombreRevista);
         String idRev = null;
-        String orden = "SELECT id_revista FROM Revista WHERE nombre_revista="+nombreRevista;//
-        ResultSet rsPrueba = Consulta.crearDeclaracionPreparadaSimple(conexion, orden).executeQuery(); //Obtenemos el resultado de la query con los datos dados       
+        String orden = "SELECT id_revista FROM Revista WHERE nombre_revista=?";//
+        ResultSet rsPrueba = Consulta.crearDeclaracionPreparada(conexion, datos, orden).executeQuery(); //Obtenemos el resultado de la query con los datos dados       
         
         while(rsPrueba.next()){//si existe el id de la revista
             idRev = rsPrueba.getString("id_revista");

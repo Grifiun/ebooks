@@ -21,24 +21,24 @@ public class RegistroTag {
         return null;
     }
 
-    public static void registrarTags(Connection EnlaceJDBC, ArrayList<String> datos) throws SQLException {
+    public static void registrarTags(ArrayList<String> datos) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         String[] tags = datos.get(1).split(" ");//Separamos los tags con los espacios
         String idRev = datos.get(0);//Creamos un String que contengra el id de la Revista
         
         for(int i = 0; i < tags.length; i++){  //creamos un for que se repetirá dependiendo de la cantidad de tags que haya          
-            if(obtenerIdTag(EnlaceJDBC, tags[i]) == null){//Se registra un nuevo tag en la base de datos si no se encuentra un id
-                datos = null;//vaciamos el ArryList
+            if(obtenerIdTag(EnlaceJDBC.EnlaceJDBC(), tags[i]) == null){//Se registra un nuevo tag en la base de datos si no se encuentra un id
+                datos.clear();//vaciamos el ArryList
                 datos.add(tags[i]);//Agregamos el tag de turno dentro del ArrayList
-                registrarNuevoTag(EnlaceJDBC, tags[i]); //Registrar el tag       
+                registrarNuevoTag(EnlaceJDBC.EnlaceJDBC(), tags[i]); //Registrar el tag       
             }
             //En este paso obligatoriamente debera de encontrar un ide, por lo tanto
-            String idTag = obtenerIdTag(EnlaceJDBC, tags[i]);
+            String idTag = obtenerIdTag(EnlaceJDBC.EnlaceJDBC(), tags[i]);
             //Vaciamos y agregamos al ArrayList los valores necesarios para registrar un nuevo TagRevista
-            datos = null;
+            datos.clear();
             datos.add(idRev);
             datos.add(idTag);
             datos.add(tags[i]);
-            registrarNuevoTagRevista(EnlaceJDBC, datos);//Creamos el registro
+            registrarNuevoTagRevista(EnlaceJDBC.EnlaceJDBC(), datos);//Creamos el registro
         }
         
     }
@@ -63,12 +63,12 @@ public class RegistroTag {
         return idTag;//retornamos el booleano
     }
 
-    private static void registrarNuevoTag(Connection conexion, String tag) {
-        ArrayList<String> datosAux = null;
-        datosAux.add(tag);
+    private static void registrarNuevoTag(Connection conexion, String tag) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+        ArrayList<String> tags = new ArrayList();
+        tags.add(tag);
         String orden = "INSERT INTO Tag (tag)" //Creamos la orden a enviar
                 + "VALUES (?)";
-        Consulta.registrarOrden(conexion, datosAux, orden);    //Enviamos la conexion de la DB, los datos a registrar y la orden a seguir    
+        Consulta.registrarOrden(EnlaceJDBC.EnlaceJDBC(), tags, orden);    //Enviamos la conexion de la DB, los datos a registrar y la orden a seguir    
     }
 
     private static void registrarNuevoTagRevista(Connection conexion, ArrayList<String> datos) {

@@ -54,7 +54,10 @@ public class ControladorLogin extends HttpServlet {
         
         try {
                 if(RevisarLogin.login(EnlaceJDBC.EnlaceJDBC(), username, pass) == true){
-                    String rol = RegistroUsuario.rol(EnlaceJDBC.EnlaceJDBC(), username);
+                    ArrayList<String> datos = new ArrayList();
+                    datos.add(username);
+                    String rol = RegistroUsuario.rol(EnlaceJDBC.EnlaceJDBC(), datos);
+                    System.out.println("aca te va: "+rol);
                     if(rol.equals("Editor")){
                         RequestDispatcher despachar = request.getRequestDispatcher("jsp/home-editor.jsp");
                         despachar.forward(request, response);
@@ -67,8 +70,6 @@ public class ControladorLogin extends HttpServlet {
                         RequestDispatcher despachar = request.getRequestDispatcher("jsp/home.jsp");
                         despachar.forward(request, response);
                     } 
-                    
-                    
                 }             
                 else{
                     RequestDispatcher despachar = request.getRequestDispatcher("index.jsp");
